@@ -31,4 +31,14 @@ userRouter.put("/update", verifyToken, async (req, res) => {
     }
 });
 
+userRouter.get("/getAllUsers", verifyToken, async (req, res) => {
+    try {
+        const {firstName} = req.query;
+        const users = await User.find({firstName: {$regex: firstName, $options: "i"}});
+        res.status(200).json({ users });
+    } catch (error) {
+        res.status(500).json({ message: "Error getting users", error });
+    }
+});
+
 export default userRouter;
