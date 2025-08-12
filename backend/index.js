@@ -7,18 +7,21 @@ import dotenv from "dotenv";
 import zod from "zod";
 import mongoose from "mongoose";
 import { verifyToken } from "./middleware/verify.js";
+import router from "./routes/index.js";
+import userRouter from "./routes/user.js";
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-
-
 const app = express();
+app.use(express.json());
+app.use("/api/v1", router);
+app.use("/api/v1/users", userRouter);
 
 connectDB();
 const User = mongoose.model("User", userSchema);
-app.use(express.json());
 
-app.post("/api/users/signup", async (req, res) => {
+
+router.post("/api/v1/users/signup", async (req, res) => {
     try {
         const userSchema = zod.object({
             firstName: zod.string().min(3).max(50),
@@ -35,7 +38,7 @@ app.post("/api/users/signup", async (req, res) => {
     }
 });
 
-app.post("/api/users/signin", async (req, res) => {
+router.post("/api/v1/users/signin", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -53,7 +56,7 @@ app.post("/api/users/signin", async (req, res) => {
     }
 });
 
-app.put("/api/users/update", verifyToken, async (req, res) => {
+router.put("/api/v1/users/update", verifyToken, async (req, res) => {
     try {
         const { firstName, lastName, email } = req.body;
         const user = await User.findOne({ _id: req.user.userId });
@@ -81,7 +84,7 @@ app.put("/api/users/update", verifyToken, async (req, res) => {
 
 
 app.listen(3000, () => {
-    console.log("Server is running on port number 3000");
+    console.log("Server is running on port 3000");
 });
 
 
