@@ -3,6 +3,7 @@ import zod from "zod";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import Balance from "../models/balance.js";
 
 const rootRouter = express.Router();
 
@@ -19,7 +20,8 @@ rootRouter.post("/signup", async (req, res) => {
         const { firstName, lastName, password, email } = userSchema.parse(req.body);
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ firstName, lastName, password: hashedPassword, email });
-        res.status(200).json({ message: "User created successfully", user } );
+        const balance = await Balance.create({ userId: user._id, balance: 1000 });
+        res.status(200).json({ message: "User created successfully", user, balance } );
     } catch (error) {
         res.status(500).json({ message: "Error creating user", error });
     }

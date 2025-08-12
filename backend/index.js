@@ -3,6 +3,7 @@ import { connectDB } from "./schemas/db.js";
 import dotenv from "dotenv";
 import rootRouter from "./routes/index.js";
 import userRouter from "./routes/user.js";
+import accountRouter from "./routes/account.js";
 import cors from "cors";
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1", rootRouter);
+app.use("/api/v1/account", accountRouter);
 
 connectDB();
 
