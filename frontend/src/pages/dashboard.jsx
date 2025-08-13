@@ -78,11 +78,11 @@ export default function Dashboard() {
         <div className="min-h-screen bg-black">
             <Navbar />
             
-            <div className="pt-20 px-4 max-w-4xl mx-auto">
+            <div className="pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
                 {/* Welcome Section - More Compact */}
-                <div className="bg-gradient-to-r from-black to-gray-900 border-2 border-[#12b981] rounded-xl p-4 mb-4 shadow-2xl">
+                <div className="bg-gradient-to-r from-black to-gray-900 border-2 border-[#12b981] rounded-xl p-4 sm:p-6 mb-4 shadow-2xl">
                     <div className="text-center">
-                        <h1 className="text-2xl font-black text-white mb-1">Welcome Back!</h1>
+                        <h1 className="text-xl sm:text-2xl font-black text-white mb-1">Welcome Back!</h1>
                         <p className="text-[#12b981] text-sm font-semibold">{user.firstName} {user.lastName}</p>
                         <p className="text-gray-400 text-xs">{user.email}</p>
                     </div>

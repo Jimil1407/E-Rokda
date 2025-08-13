@@ -80,10 +80,10 @@ export default function Signup() {
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-4">
-            <div className="bg-black border-2 border-white rounded-xl p-8 max-w-md w-full shadow-2xl">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-black text-white mb-2">Create Account</h1>
-                    <p className="text-gray-400">Join E-Rokda today</p>
+            <div className="bg-black border-2 border-white rounded-xl p-6 sm:p-8 max-w-md w-full shadow-2xl">
+                <div className="text-center mb-6 sm:mb-8">
+                    <h1 className="text-2xl sm:text-3xl font-black text-white mb-2">Create Account</h1>
+                    <p className="text-sm sm:text-base text-gray-400">Join E-Rokda today</p>
                 </div>
 
                 {error && (

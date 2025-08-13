@@ -62,10 +62,10 @@ export default function Signin() {
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-4">
-            <div className="bg-black border-2 border-white rounded-xl p-8 max-w-md w-full shadow-2xl">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-black text-white mb-2">Welcome Back</h1>
-                    <p className="text-gray-400">Sign in to your E-Rokda account</p>
+            <div className="bg-black border-2 border-white rounded-xl p-6 sm:p-8 max-w-md w-full shadow-2xl">
+                <div className="text-center mb-6 sm:mb-8">
+                    <h1 className="text-2xl sm:text-3xl font-black text-white mb-2">Welcome Back</h1>
+                    <p className="text-sm sm:text-base text-gray-400">Sign in to your E-Rokda account</p>
                 </div>
 
                 {error && (
@@ -76,26 +76,26 @@ export default function Signin() {
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className="block text-white font-semibold mb-2">Email</label>
+                        <label className="block text-white font-semibold mb-2 text-sm sm:text-base">Email</label>
                         <input 
                             type="email" 
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-black border-2 border-gray-600 rounded-lg text-white font-medium transition-all duration-200 focus:outline-none focus:border-[#12b981] focus:ring-2 focus:ring-[#12b981]/20"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-black border-2 border-gray-600 rounded-lg text-white font-medium transition-all duration-200 focus:outline-none focus:border-[#12b981] focus:ring-2 focus:ring-[#12b981]/20 text-sm sm:text-base"
                             placeholder="Enter your email"
                             disabled={loading}
                         />
                     </div>
 
                     <div className="mb-6">
-                        <label className="block text-white font-semibold mb-2">Password</label>
+                        <label className="block text-white font-semibold mb-2 text-sm sm:text-base">Password</label>
                         <input 
                             type="password" 
                             name="password"
                             value={formData.password}
                             onChange={handleInputChange}
-                            className="w-full px-4 py-3 bg-black border-2 border-gray-600 rounded-lg text-white font-medium transition-all duration-200 focus:outline-none focus:border-[#12b981] focus:ring-2 focus:ring-[#12b981]/20"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-black border-2 border-gray-600 rounded-lg text-white font-medium transition-all duration-200 focus:outline-none focus:border-[#12b981] focus:ring-2 focus:ring-[#12b981]/20 text-sm sm:text-base"
                             placeholder="Enter your password"
                             disabled={loading}
                         />

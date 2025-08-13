@@ -85,9 +85,9 @@ export default function Balance() {
 
     if (loading) {
         return (
-            <div className="bg-black border-2 border-white rounded-lg p-6 mt-20 mx-6 shadow-2xl">
+            <div className="bg-black border-2 border-white rounded-lg p-4 sm:p-6 shadow-2xl">
                 <div className="text-center">
-                    <div className="text-white text-lg font-semibold">Loading balance...</div>
+                    <div className="text-white text-base sm:text-lg font-semibold">Loading balance...</div>
                 </div>
             </div>
         )
@@ -95,10 +95,10 @@ export default function Balance() {
 
     if (error) {
         return (
-            <div className="bg-black border-2 border-red-500 rounded-lg p-6 mt-20 mx-6 shadow-2xl">
+            <div className="bg-black border-2 border-red-500 rounded-lg p-4 sm:p-6 shadow-2xl">
                 <div className="text-center">
-                    <div className="text-red-400 text-lg font-semibold mb-2">Error</div>
-                    <div className="text-red-300 text-sm">{error}</div>
+                    <div className="text-red-400 text-base sm:text-lg font-semibold mb-2">Error</div>
+                    <div className="text-red-300 text-xs sm:text-sm">{error}</div>
                     <button 
                         onClick={fetchBalance}
                         className="px-3 py-1 bg-[#12b981] text-white rounded-lg font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-1 hover:shadow-lg shadow-md flex items-center gap-2"
@@ -114,13 +114,13 @@ export default function Balance() {
     }
 
     return (
-        <div className="bg-black border-2 border-white rounded-lg p-6 mt-20 mx-6 shadow-2xl">
+        <div className="bg-black border-2 border-white rounded-lg p-4 sm:p-6 shadow-2xl">
             <div className="text-center">
-                <div className="text-white text-lg font-semibold mb-2">Your Balance</div>
-                <div className="text-4xl font-black text-[#12b981] mb-2">
+                <div className="text-white text-base sm:text-lg font-semibold mb-2">Your Balance</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#12b981] mb-2">
                     ₹{formatBalance(balance)}
                 </div>
-                <div className="text-gray-300 text-sm">Available for transactions</div>
+                <div className="text-gray-300 text-xs sm:text-sm">Available for transactions</div>
             </div>
         </div>
     )
