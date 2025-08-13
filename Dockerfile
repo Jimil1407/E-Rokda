@@ -2,8 +2,8 @@ FROM node:20.11-alpine
 
 WORKDIR /app
 
-COPY package.json .
-COPY package-lock.json .
+COPY backend/package.json .
+COPY backend/package-lock.json .
 
 RUN npm install
 
