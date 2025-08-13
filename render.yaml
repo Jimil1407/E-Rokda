@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: erokda-backend
+    env: node
+    buildCommand: docker build -t erokda-backend .
+    startCommand: docker run -p $PORT:3000 erokda-backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 3000
