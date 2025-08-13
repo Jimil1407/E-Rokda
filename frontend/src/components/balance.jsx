@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 import { useNavigate } from 'react-router-dom'
 
 export default function Balance() {
@@ -23,7 +24,7 @@ export default function Balance() {
                 return
             }
 
-            const response = await fetch('http://localhost:3000/api/v1/account/getBalance', {
+            const response = await fetch(API_ENDPOINTS.GET_BALANCE, {
                 method: 'GET',
                 headers: {
                     'Authorization': token,

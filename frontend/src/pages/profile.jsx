@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/navbar'
 
@@ -80,7 +81,7 @@ export default function Profile() {
                 return
             }
 
-            const response = await fetch('http://localhost:3000/api/v1/users/update', {
+            const response = await fetch(API_ENDPOINTS.UPDATE_USER, {
                 method: 'PUT',
                 headers: {
                     'Authorization': token,

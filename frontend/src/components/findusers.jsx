@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 
 export default function FindUsers({ onSendMoney }) {
     const [searchQuery, setSearchQuery] = useState('')
@@ -36,7 +37,7 @@ export default function FindUsers({ onSendMoney }) {
                 return
             }
 
-            const response = await fetch(`http://localhost:3000/api/v1/users/getAllUsers?firstName=${encodeURIComponent(searchQuery)}`, {
+            const response = await fetch(`${API_ENDPOINTS.GET_ALL_USERS}?firstName=${encodeURIComponent(searchQuery)}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': token,

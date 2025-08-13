@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { API_ENDPOINTS } from '../config/api'
 
 export default function Signin() {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export default function Signin() {
         setError('')
 
         try {
-            const response = await fetch('http://localhost:3000/api/v1/signin', {
+            const response = await fetch(API_ENDPOINTS.SIGNIN, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

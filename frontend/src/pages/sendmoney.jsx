@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/navbar'
 import SendMoneyModal from '../components/sendmoneymodal'
@@ -76,7 +77,7 @@ export default function SendMoney() {
                 return
             }
 
-            const response = await fetch(`http://localhost:3000/api/v1/users/getAllUsers?firstName=${encodeURIComponent(searchQuery)}`, {
+            const response = await fetch(`${API_ENDPOINTS.GET_ALL_USERS}?firstName=${encodeURIComponent(searchQuery)}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': token,

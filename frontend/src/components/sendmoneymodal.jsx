@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { API_ENDPOINTS } from '../config/api'
 
 export default function SendMoneyModal({ user, onClose, onSuccess }) {
     const [amount, setAmount] = useState('')
@@ -45,7 +46,7 @@ export default function SendMoneyModal({ user, onClose, onSuccess }) {
                 return
             }
 
-            const response = await fetch('http://localhost:3000/api/v1/account/transfer', {
+            const response = await fetch(API_ENDPOINTS.TRANSFER, {
                 method: 'POST',
                 headers: {
                     'Authorization': token,
