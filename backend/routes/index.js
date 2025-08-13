@@ -39,7 +39,7 @@ rootRouter.post("/signup", async (req, res) => {
             return res.status(401).json({ message: "Invalid email or password" });
         }
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
-        res.status(200).json({ message: "Login successful", token });
+        res.status(200).json({ message: "Login successful", token, user });
     } catch (error) {
         res.status(500).json({ message: "Error logging in", error });
     }

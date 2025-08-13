@@ -36,13 +36,33 @@ export default function Signin() {
             })
             const responseData = await response.json()
             
+            console.log('Signin response:', responseData) // Debug log
+            
             if (response.ok) {
+                // Store token
+                localStorage.setItem('token', responseData.token)
+                
+                // Store only essential user data (no password)
+                const userData = {
+                    _id: responseData.user._id,
+                    firstName: responseData.user.firstName,
+                    lastName: responseData.user.lastName,
+                    email: responseData.user.email
+                }
+                localStorage.setItem('user', JSON.stringify(userData))
+                
+                console.log('Stored in localStorage:', {
+                    token: localStorage.getItem('token'),
+                    user: localStorage.getItem('user')
+                })
+                
                 setSuccess('Sign in successful! Redirecting...')
                 setTimeout(() => navigate('/dashboard'), 1500)
             } else {
                 setError(responseData.message || 'Sign in failed')
             }
         } catch (err) {
+            console.error('Signin error:', err)
             setError('Network error. Please try again.')
         }
         

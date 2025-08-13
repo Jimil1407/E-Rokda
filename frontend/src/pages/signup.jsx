@@ -50,8 +50,10 @@ export default function Signup() {
             })
             const responseData = await response.json()
             
+            console.log('Signup response:', responseData) // Debug log
+            
             if (response.ok) {
-                setSuccess('Signup successful! Redirecting to dashboard...')
+                setSuccess('Signup successful! Signing you in...')
                 
                 // Auto signin after successful signup
                 const signinUrl = 'http://localhost:3000/api/v1/signin'
@@ -64,14 +66,37 @@ export default function Signup() {
                 })
                 
                 if (signinResponse.ok) {
+                    const signinData = await signinResponse.json()
+                    console.log('Auto signin response:', signinData) // Debug log
+                    
+                    // Store token
+                    localStorage.setItem('token', signinData.token)
+                    
+                    // Store only essential user data (no password)
+                    const userData = {
+                        _id: signinData.user._id,
+                        firstName: signinData.user.firstName,
+                        lastName: signinData.user.lastName,
+                        email: signinData.user.email
+                    }
+                    localStorage.setItem('user', JSON.stringify(userData))
+                    
+                    console.log('Stored in localStorage:', {
+                        token: localStorage.getItem('token'),
+                        user: localStorage.getItem('user')
+                    })
+                    
                     setTimeout(() => navigate('/dashboard'), 1500)
                 } else {
+                    const signinError = await signinResponse.json()
+                    console.error('Auto signin failed:', signinError)
                     setSuccess('Signup successful! Please sign in.')
                 }
             } else {
                 setError(responseData.message || 'Signup failed')
             }
         } catch (err) {
+            console.error('Signup error:', err)
             setError('Network error. Please try again.')
         }
         
