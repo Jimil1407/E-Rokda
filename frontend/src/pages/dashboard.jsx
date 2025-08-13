@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/navbar'
 import Balance from '../components/balance'
-import FindUsers from '../components/findusers'
-import SendMoneyModal from '../components/sendmoneymodal'
 
 export default function Dashboard() {
     const navigate = useNavigate()
-    const [selectedUser, setSelectedUser] = useState(null)
-    const [showSendMoneyModal, setShowSendMoneyModal] = useState(false)
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -44,20 +40,6 @@ export default function Dashboard() {
         setLoading(false)
     }, [navigate])
 
-    const handleSendMoney = (user) => {
-        setSelectedUser(user)
-        setShowSendMoneyModal(true)
-    }
-
-    const handleSendMoneySuccess = () => {
-        window.location.reload() 
-    }
-
-    const closeSendMoneyModal = () => {
-        setShowSendMoneyModal(false)
-        setSelectedUser(null)
-    }
-
     if (loading) {
         return (
             <div className="min-h-screen bg-black flex items-center justify-center">
@@ -79,7 +61,6 @@ export default function Dashboard() {
             <Navbar />
             
             <div className="pt-20 px-4 max-w-4xl mx-auto">
-                {/* Welcome Section - More Compact */}
                 <div className="bg-gradient-to-r from-black to-gray-900 border-2 border-[#12b981] rounded-xl p-4 mb-4 shadow-2xl">
                     <div className="text-center">
                         <h1 className="text-2xl font-black text-white mb-1">Welcome Back!</h1>
@@ -88,24 +69,25 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                {/* Balance Component */}
                 <div className="mb-4">
                     <Balance />
                 </div>
 
-                {/* Find Users Component */}
-                <div className="mb-6">
-                    <FindUsers onSendMoney={handleSendMoney} />
+                <div className="bg-gradient-to-r from-black to-gray-900 border-2 border-[#12b981] rounded-xl p-4 shadow-2xl">
+                    <div className="text-center">
+                        <h2 className="text-lg font-black text-white mb-2">Quick Actions</h2>
+                        <button 
+                            onClick={() => navigate('/sendmoney')}
+                            className="px-6 py-3 bg-[#12b981] text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-1 hover:shadow-lg shadow-md flex items-center gap-2 mx-auto"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                            </svg>
+                            Send Money
+                        </button>
+                    </div>
                 </div>
             </div>
-        
-            {showSendMoneyModal && selectedUser && (
-                <SendMoneyModal 
-                    user={selectedUser}
-                    onClose={closeSendMoneyModal}
-                    onSuccess={handleSendMoneySuccess}
-                />
-            )}
         </div>
     )
 }

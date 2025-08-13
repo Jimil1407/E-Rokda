@@ -46,7 +46,6 @@ export default function SendMoney() {
         setPageLoading(false)
     }, [navigate])
 
-    // Debounced search effect
     useEffect(() => {
         const searchTimeout = setTimeout(() => {
             if (searchQuery.trim().length >= 2) {
@@ -55,7 +54,7 @@ export default function SendMoney() {
                 setUsers([])
                 setError('')
             }
-        }, 500) // 500ms delay
+        }, 500)
 
         return () => clearTimeout(searchTimeout)
     }, [searchQuery])
@@ -86,7 +85,6 @@ export default function SendMoney() {
             })
 
             const data = await response.json()
-            console.log('Users search response:', data)
 
             if (response.ok) {
                 setUsers(data.users || [])
@@ -141,7 +139,6 @@ export default function SendMoney() {
             <Navbar />
             
             <div className="pt-20 px-4 max-w-4xl mx-auto">
-                {/* Header */}
                 <div className="bg-gradient-to-r from-black to-gray-900 border-2 border-[#12b981] rounded-xl p-4 mb-4 shadow-2xl">
                     <div className="text-center">
                         <h1 className="text-2xl font-black text-white mb-1">Send Money</h1>
@@ -149,7 +146,6 @@ export default function SendMoney() {
                     </div>
                 </div>
 
-                {/* Search Form */}
                 <div className="bg-gradient-to-r from-black to-gray-900 border-2 border-[#12b981] rounded-xl p-4 shadow-2xl">
                     <div className="mb-4">
                         <div className="relative">
@@ -171,14 +167,12 @@ export default function SendMoney() {
                         </div>
                     </div>
 
-                    {/* Error Message */}
                     {error && (
                         <div className="bg-red-900 border border-red-600 text-red-200 px-3 py-2 rounded-lg mb-4 text-center text-xs font-medium">
                             {error}
                         </div>
                     )}
 
-                    {/* Users List */}
                     {users.length > 0 && (
                         <div className="space-y-3">
                             <h3 className="text-sm font-semibold text-[#12b981] mb-3">Found Users:</h3>
@@ -194,8 +188,11 @@ export default function SendMoney() {
                                         </div>
                                         <button 
                                             onClick={() => handleSendMoney(user)}
-                                            className="px-3 py-1 bg-[#12b981] text-white rounded-lg font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-0.5"
+                                            className="px-3 py-1 bg-[#12b981] text-white rounded-lg font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-1 hover:shadow-lg shadow-md flex items-center gap-1"
                                         >
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                                            </svg>
                                             Send
                                         </button>
                                     </div>
@@ -204,7 +201,6 @@ export default function SendMoney() {
                         </div>
                     )}
 
-                    {/* No Results */}
                     {!loading && users.length === 0 && !error && searchQuery && searchQuery.length >= 2 && (
                         <div className="text-center text-gray-300">
                             <div className="text-sm font-semibold mb-1">No users found</div>
@@ -212,7 +208,6 @@ export default function SendMoney() {
                         </div>
                     )}
 
-                    {/* Initial State */}
                     {!loading && users.length === 0 && !error && searchQuery.length < 2 && (
                         <div className="text-center text-gray-300">
                             <div className="text-sm font-semibold mb-1">Search for users</div>

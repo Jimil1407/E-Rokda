@@ -6,7 +6,6 @@ export default function SendMoneyModal({ user, onClose, onSuccess }) {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
-    // Handle case where user prop is not provided
     if (!user) {
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -59,7 +58,6 @@ export default function SendMoneyModal({ user, onClose, onSuccess }) {
             })
 
             const data = await response.json()
-            console.log('Transfer response:', data) // Debug log
 
             if (response.ok) {
                 setSuccess('Money sent successfully!')
@@ -92,7 +90,6 @@ export default function SendMoneyModal({ user, onClose, onSuccess }) {
                     </button>
                 </div>
 
-                {/* Recipient Info */}
                 <div className="bg-white text-black p-4 rounded-lg mb-6">
                     <div className="text-center">
                         <div className="font-bold text-lg mb-1">Sending to:</div>
@@ -101,21 +98,18 @@ export default function SendMoneyModal({ user, onClose, onSuccess }) {
                     </div>
                 </div>
 
-                {/* Error Message */}
                 {error && (
                     <div className="bg-red-900 border border-red-600 text-red-200 px-4 py-3 rounded-lg mb-6 text-center text-sm font-medium">
                         {error}
                     </div>
                 )}
 
-                {/* Success Message */}
                 {success && (
                     <div className="bg-green-900 border border-green-600 text-green-200 px-4 py-3 rounded-lg mb-6 text-center text-sm font-medium">
                         {success}
                     </div>
                 )}
 
-                {/* Send Money Form */}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-6">
                         <label className="block text-white font-semibold mb-2">Amount (₹)</label>
@@ -135,16 +129,22 @@ export default function SendMoneyModal({ user, onClose, onSuccess }) {
                         <button 
                             type="button" 
                             onClick={onClose}
-                            className="flex-1 px-4 py-3 bg-gray-600 text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-gray-700 hover:-translate-y-0.5"
+                            className="flex-1 px-4 py-3 bg-gray-600 text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-gray-700 hover:-translate-y-1 hover:shadow-lg shadow-md flex items-center justify-center gap-2"
                             disabled={loading}
                         >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                             Cancel
                         </button>
                         <button 
                             type="submit" 
                             disabled={loading}
-                            className="flex-1 px-4 py-3 bg-[#12b981] text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
+                            className="flex-1 px-4 py-3 bg-[#12b981] text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-1 hover:shadow-lg shadow-md disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                            </svg>
                             {loading ? 'Sending...' : 'Send Money'}
                         </button>
                     </div>

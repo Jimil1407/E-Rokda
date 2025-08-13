@@ -6,7 +6,6 @@ export default function FindUsers({ onSendMoney }) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    // Debounced search effect
     useEffect(() => {
         const searchTimeout = setTimeout(() => {
             if (searchQuery.trim().length >= 2) {
@@ -15,7 +14,7 @@ export default function FindUsers({ onSendMoney }) {
                 setUsers([])
                 setError('')
             }
-        }, 500) // 500ms delay
+        }, 500)
 
         return () => clearTimeout(searchTimeout)
     }, [searchQuery])
@@ -46,7 +45,6 @@ export default function FindUsers({ onSendMoney }) {
             })
 
             const data = await response.json()
-            console.log('Users search response:', data) // Debug log
 
             if (response.ok) {
                 setUsers(data.users || [])
@@ -76,7 +74,6 @@ export default function FindUsers({ onSendMoney }) {
         <div className="bg-black border-2 border-white rounded-lg p-6 mx-6 shadow-2xl">
             <h2 className="text-2xl font-black text-white mb-6 text-center">Find Users</h2>
             
-            {/* Search Form */}
             <div className="mb-6">
                 <div className="relative">
                     <input 
@@ -97,14 +94,12 @@ export default function FindUsers({ onSendMoney }) {
                 </div>
             </div>
 
-            {/* Error Message */}
             {error && (
                 <div className="bg-red-900 border border-red-600 text-red-200 px-4 py-3 rounded-lg mb-6 text-center text-sm font-medium">
                     {error}
                 </div>
             )}
 
-            {/* Users List */}
             {users.length > 0 && (
                 <div className="space-y-4">
                     <h3 className="text-lg font-semibold text-white mb-4">Found Users:</h3>
@@ -120,8 +115,11 @@ export default function FindUsers({ onSendMoney }) {
                                 </div>
                                 <button 
                                     onClick={() => handleSendMoney(user)}
-                                    className="px-4 py-2 bg-[#12b981] text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-0.5"
+                                    className="px-4 py-2 bg-[#12b981] text-white rounded-lg font-semibold text-sm uppercase tracking-wider transition-all duration-200 hover:bg-[#0ea371] hover:-translate-y-1 hover:shadow-lg shadow-md flex items-center gap-2"
                                 >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                                    </svg>
                                     Send Money
                                 </button>
                             </div>
@@ -130,7 +128,6 @@ export default function FindUsers({ onSendMoney }) {
                 </div>
             )}
 
-            {/* No Results */}
             {!loading && users.length === 0 && !error && searchQuery && searchQuery.length >= 2 && (
                 <div className="text-center text-gray-300">
                     <div className="text-lg font-semibold mb-2">No users found</div>
@@ -138,7 +135,6 @@ export default function FindUsers({ onSendMoney }) {
                 </div>
             )}
 
-            {/* Initial State */}
             {!loading && users.length === 0 && !error && searchQuery.length < 2 && (
                 <div className="text-center text-gray-300">
                     <div className="text-lg font-semibold mb-2">Search for users</div>
